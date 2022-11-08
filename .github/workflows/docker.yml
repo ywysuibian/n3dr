@@ -6,8 +6,6 @@ name: Docker
       - 'main'
 
 env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   DOCKER_IMAGE_TAG: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
 
 jobs:
@@ -32,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${DOCKER_USERNAME}/n3dr:${DOCKER_IMAGE_TAG}
+          tags: ${{ secrets.DOCKER_USERNAME }}/n3dr:${DOCKER_IMAGE_TAG}
           build-args: |
             VERSION=${{ github.ref }}
       - name: Image digest
