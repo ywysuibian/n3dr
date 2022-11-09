@@ -141,7 +141,7 @@ func maven(path string, skipErrors bool) (mp mavenParts, err error) {
 
 func UploadSingleArtifact(client *client.Nexus3, path, localDiskRepo, localDiskRepoHome, repoFormat string) error {
 	re := regexp.MustCompile("^"+localDiskRepoHome+"/?")
-	dir := re.ReplaceAllString(filepath.Dir(path), "")
+	dir := re.ReplaceAllString(filepath.Dir(path), "/")
 	//dir := strings.Replace(filepath.Dir(path), localDiskRepoHome+"/", "", -1)
 	filename := filepath.Base(path)
 
